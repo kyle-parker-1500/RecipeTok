@@ -1,5 +1,6 @@
 package com.example.project02group7.database.entities;
 
+import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 import java.util.Objects;
