@@ -17,7 +17,7 @@
         android:textStyle="bold"
         android:textColor="@color/black"
         android:text="@string/login_to_recipetok"
-        android:textSize="32sp"
+        android:textSize="40sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
