@@ -10,6 +10,7 @@ import androidx.lifecycle.LiveData;
 import com.example.project02group7.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
+    public static final String TAG = "GROUP07_RECIPE";
 
     private static final String MAIN_ACTIVITY_USER_ID = "com.example.project02group7.MAIN_ACTIVITY_USER_ID";
     static final String SHARED_PREFERENCE_USERID_KEY = "com.example.project02group7.SHARED_PREFERENCE_USERID_KEY";
