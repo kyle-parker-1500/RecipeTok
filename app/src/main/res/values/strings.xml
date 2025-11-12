@@ -5,4 +5,5 @@
     <string name="password">Password</string>
     <string name="login_to_recipetok">Login to RecipeTok</string>
     <string name="log_in">Log in</string>
+    <string name="sign_up">Sign up</string>
 </resources>

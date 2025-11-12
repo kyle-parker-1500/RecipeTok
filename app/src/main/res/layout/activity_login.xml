@@ -7,6 +7,21 @@
     android:layout_height="match_parent"
     tools:context=".LoginActivity">
 
+    <Button
+        android:id="@+id/loginButton2"
+        android:layout_width="120dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginBottom="4dp"
+        android:backgroundTint="#fef7ff"
+        android:text="@string/sign_up"
+        android:textAlignment="viewStart"
+        android:textColor="@color/my_button_color"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
     <TextView
         android:id="@+id/titleLoginTextView"
         android:layout_width="match_parent"
@@ -14,10 +29,10 @@
         android:layout_margin="16dp"
         android:layout_marginBottom="24dp"
         android:gravity="center"
-        android:textStyle="bold"
-        android:textColor="@color/black"
         android:text="@string/login_to_recipetok"
+        android:textColor="@color/black"
         android:textSize="40sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
