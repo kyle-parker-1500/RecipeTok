@@ -9,51 +9,49 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
 
+import com.example.project02group7.database.RecipeRepository;
+import com.example.project02group7.database.entities.User;
 import com.example.project02group7.databinding.ActivityLoginBinding;
 
 public class LoginActivity extends AppCompatActivity {
 
     private ActivityLoginBinding binding;
+    private RecipeRepository repository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        /*
-        // repository = DATABASEREPO.getRepository(getApplication());
+
+        repository = RecipeRepository.getRepository(getApplication());
         binding.loginButton.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View view){
                verifyUser();
            }
         });
-        */
     }
 
-
     public void verifyUser(){
-        /*
-        String username = binding.BUTTON_NAME.getText().toString();
+        String username = binding.userNameLoginEditText.getText().toString();
 
         if(username.isEmpty()){
             toastMaker("Username cannot be blank");
             return;
         }
 
-        LiveData<User> userObserver = repository.getUserByUserName(username);
+        LiveData<User> userObserver = repository.getUserByUsername(username);
         userObserver.observe(this, user -> {
-            String password = binding.NAME.getText().toString();
+            String password = binding.passwordLoginEditText.getText().toString();
             if(password.equals(user.getPassword())){
                 startActivity(MainActivity.mainActivityIntentFactory(getApplicationContext(), user.getId()));
             }
             else{
                 toastMaker("Invalid password");
-                binding.Name.setSelection(0);
+                binding.passwordLoginEditText.setSelection(0);
             }
         });
-        */
-        return;
     }
 
     private void toastMaker(String message){
