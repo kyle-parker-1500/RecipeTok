@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Project02Group7</string>
+    <string name="logged_in">LOGGED IN</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="login_to_recipetok">Login to RecipeTok</string>
+    <string name="log_in">Log in</string>
+    <string name="sign_up">Sign up</string>
 </resources>
