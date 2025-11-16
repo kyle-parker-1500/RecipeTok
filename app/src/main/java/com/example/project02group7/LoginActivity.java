@@ -25,41 +25,57 @@ public class LoginActivity extends AppCompatActivity {
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        // Get the repository
         repository = RecipeRepository.getRepository(getApplication());
+        if(repository == null){
+            toastMaker("Error initializing database");
+            return;
+        }
+
+        // Login button
         binding.loginButton.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View view){
                verifyUser();
            }
         });
+
+        // binding.createAccountButton.setOnClickListener (when needed?)
     }
 
+    /*
+        Verify username + password using DB
+        blank username -> toast
+        unknown username -> toast
+        wrong password -> toast
+        all fine? Go to MainActivity with that UID
+     */
     public void verifyUser(){
-        String username = binding.userNameLoginEditText.getText().toString();
+        final String username = binding.userNameLoginEditText.getText().toString().trim();
 
         if(username.isEmpty()){
             toastMaker("Username cannot be blank");
             return;
         }
 
+        if(repository == null){
+            toastMaker("Database not ready");
+            return;
+        }
+
         LiveData<User> userObserver = repository.getUserByUsername(username);
         userObserver.observe(this, user -> {
 
+            // username not found
             if(user == null){
                 toastMaker(String.format("%s is not a valid username", username));
                 binding.userNameLoginEditText.setSelection(0);
                 return;
             }
-
+            // Username exists, password check
             String password = binding.passwordLoginEditText.getText().toString();
             if(password.equals(user.getPassword())){
-
-                SharedPreferences sharedPreferences = getApplication()
-                        .getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
-                sharedPreferences.edit()
-                                .putInt(getString(R.string.preference_userId_key), user.getId())
-                                        .apply();
-
+                // go to MainActivity for this user
                 startActivity(MainActivity.mainActivityIntentFactory(
                         getApplicationContext(),
                         user.getId()));

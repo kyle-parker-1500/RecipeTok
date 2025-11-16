@@ -17,7 +17,7 @@ import com.example.project02group7.database.typeConverters.LocalDateTypeConverte
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-//@TypeConverters(LocalDateTypeConverter.class)
+@TypeConverters(LocalDateTypeConverter.class)
 @Database(entities = {User.class}, version = 1, exportSchema = false)
 public abstract class RecipeDatabase extends RoomDatabase {
     public static final String USER_TABLE = "userTable";
@@ -30,7 +30,8 @@ public abstract class RecipeDatabase extends RoomDatabase {
 
     // says: create service to supply threads
     // create @ startup and put in pool -> DB will have max of 4 threads
-    static final ExecutorService databaseWriteExecutor = Executors.newFixedThreadPool(NUMBER_OF_THREADS);
+    static final ExecutorService databaseWriteExecutor =
+            Executors.newFixedThreadPool(NUMBER_OF_THREADS);
 
     // singleton: only one instance of UserDB exists at any one time
     static RecipeDatabase getDatabase(final Context context) {
@@ -47,8 +48,8 @@ public abstract class RecipeDatabase extends RoomDatabase {
                                     RecipeDatabase.class,
                                     DATABASE_NAME
                             )
-                            .fallbackToDestructiveMigration()
                             .addCallback(addDefaultValues)
+                            .fallbackToDestructiveMigration()
                             .build();
                 }
             }

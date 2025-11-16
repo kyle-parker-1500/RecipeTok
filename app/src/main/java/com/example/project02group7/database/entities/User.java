@@ -65,6 +65,6 @@ public class User {
     }
 
     public void setAdmin(boolean admin) {
-        isAdmin = true;
+        isAdmin = admin;
     }
 }

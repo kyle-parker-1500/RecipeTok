@@ -20,7 +20,7 @@ public class RecipeRepository {
     // constructor
     private RecipeRepository(Application application) {
         RecipeDatabase db = RecipeDatabase.getDatabase(application);
-        this.userDAO = db.userDAO();
+        userDAO = db.userDAO();
     }
 
     // singleton RecipeRepository
