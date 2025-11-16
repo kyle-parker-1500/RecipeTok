@@ -7,4 +7,5 @@
     <string name="log_in">Log in</string>
     <string name="preference_file_key">createdByVictor</string>
     <string name="preference_userId_key">CreatedByVictor</string>
+    <string name="logged_ins">Logged in</string>
 </resources>

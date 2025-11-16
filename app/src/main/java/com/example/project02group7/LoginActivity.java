@@ -2,6 +2,7 @@ package com.example.project02group7;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -45,12 +46,20 @@ public class LoginActivity extends AppCompatActivity {
         userObserver.observe(this, user -> {
 
             if(user == null){
-                toastMaker("User does not exist");
+                toastMaker(String.format("%s is not a valid username", username));
+                binding.userNameLoginEditText.setSelection(0);
                 return;
             }
 
             String password = binding.passwordLoginEditText.getText().toString();
             if(password.equals(user.getPassword())){
+
+                SharedPreferences sharedPreferences = getApplication()
+                        .getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+                sharedPreferences.edit()
+                                .putInt(getString(R.string.preference_userId_key), user.getId())
+                                        .apply();
+
                 startActivity(MainActivity.mainActivityIntentFactory(
                         getApplicationContext(),
                         user.getId()));
