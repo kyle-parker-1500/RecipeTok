@@ -48,8 +48,8 @@ public abstract class RecipeDatabase extends RoomDatabase {
                                     RecipeDatabase.class,
                                     DATABASE_NAME
                             )
-                            .addCallback(addDefaultValues)
                             .fallbackToDestructiveMigration()
+                            .addCallback(addDefaultValues)
                             .build();
                 }
             }
