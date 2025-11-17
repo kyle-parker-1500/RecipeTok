@@ -1,0 +1,74 @@
+package com.example.project02group7;
+
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LiveData;
+
+import com.example.project02group7.database.RecipeRepository;
+import com.example.project02group7.database.entities.User;
+import com.example.project02group7.databinding.ActivityLandingPageBinding;
+
+import org.w3c.dom.Text;
+
+public class LandingPageActivity extends AppCompatActivity {
+    private static final String LANDING_PAGE_ACTIVITY_USER_ID = "com.example.project02group7.LANDING_PAGE_ACTIVITY_USER_ID";
+    private ActivityLandingPageBinding binding;
+    private RecipeRepository repository;
+    LiveData<User> username;
+    boolean isAdmin;
+    private User user;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        binding = ActivityLandingPageBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
+        repository = RecipeRepository.getRepository(getApplication());
+
+        if (repository == null) {
+            Toast.makeText(this, "Error initializing database", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // show logged in username
+        Intent intent = getIntent();
+        username = repository.getUserByUsername(intent.getStringExtra("USERNAME"));
+        isAdmin = intent.getBooleanExtra("IS_ADMIN", false);
+
+        TextView usernameTextView = binding.UsernameTextView;
+        usernameTextView.setText(String.format("%s", username));
+
+        TextView isAdminTextView = binding.IsAdminTextView;
+        if (isAdmin) {
+            isAdminTextView.setText("Yes");
+        } else {
+            isAdminTextView.setText("No");
+        }
+
+        // show is admin
+        // implement functionality for logout button
+        Button logoutButton = binding.LogoutButton;
+        logoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = MainActivity.mainActivityIntentFactory(getApplicationContext(), user.getId());
+                startActivity(intent);
+            }
+        });
+    }
+
+    static Intent landingPageIntentFactory(Context applicationContext, String username, boolean admin) {
+        Intent intent = new Intent(applicationContext, LandingPageActivity.class);
+        // may want to change "USER_ID" to symbolic constant
+        intent.putExtra("USERNAME", username);
+        intent.putExtra("IS_ADMIN", admin);
+        return intent;
+    }
+}

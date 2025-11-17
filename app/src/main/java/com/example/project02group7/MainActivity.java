@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -17,6 +19,7 @@ import androidx.lifecycle.LiveData;
 
 import com.example.project02group7.database.RecipeRepository;
 import com.example.project02group7.database.entities.User;
+import com.example.project02group7.databinding.ActivityLandingPageBinding;
 import com.example.project02group7.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
@@ -37,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        updateSharedPreference();
+
         // Get repository
         repository = RecipeRepository.getRepository(getApplication());
 
@@ -45,16 +50,27 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        // Determines who is logged in
-        loginUser(savedInstanceState);
+        // where update shared preference used to be
 
-        // Persist whatever UID we ended up with
-        updateSharedPreference();
+        // login button
+        Button loginButton = binding.MainActivityLoginButton;
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // send to login page
+                Intent intent = LoginActivity.loginIntentFactory(getApplicationContext());
+                startActivity(intent);
+            }
+        });
 
-        if(loggedInUserId == LOGGED_OUT){
-            Intent intent = LoginActivity.loginIntentFactory(getApplicationContext());
-            startActivity(intent);
-        }
+        // create account button
+        Button createAccountButton = binding.MainActivityCreateAccountButton;
+        createAccountButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), "Not implemented yet", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     /*
@@ -118,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = getApplication()
                 .getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
 
-        SharedPreferences.Editor editor= sharedPreferences.edit();
+        SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putInt(getString(R.string.preference_userId_key), loggedInUserId);
         editor.apply();
     }

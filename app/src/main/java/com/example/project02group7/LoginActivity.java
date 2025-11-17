@@ -63,6 +63,7 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
 
+        // observer watching db username
         LiveData<User> userObserver = repository.getUserByUsername(username);
         userObserver.observe(this, user -> {
 
@@ -74,14 +75,14 @@ public class LoginActivity extends AppCompatActivity {
             }
             // Username exists, password check
             String password = binding.passwordLoginEditText.getText().toString();
-            if(password.equals(user.getPassword())){
-                // go to MainActivity for this user
-                startActivity(MainActivity.mainActivityIntentFactory(
-                        getApplicationContext(),
-                        user.getId()));
+            // now checking for username & password to be equal
+            if(username.equals(user.getUsername()) && password.equals(user.getPassword())){
+                // go to LandingPageActivity for this user
+                Intent intent = LandingPageActivity.landingPageIntentFactory(getApplicationContext(), user.getUsername(), user.isAdmin());
+                startActivity(intent);
             }
             else{
-                toastMaker("Invalid password");
+                toastMaker("Invalid username or password");
                 binding.passwordLoginEditText.setSelection(0);
             }
         });
