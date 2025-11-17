@@ -2,6 +2,7 @@ package com.example.project02group7;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -64,6 +65,7 @@ public class LandingPageActivity extends AppCompatActivity {
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                updateSharedPreference();
                 Intent intent = MainActivity.mainActivityIntentFactory(getApplicationContext(), user.getId());
                 startActivity(intent);
             }
@@ -76,5 +78,12 @@ public class LandingPageActivity extends AppCompatActivity {
         intent.putExtra("USERNAME", username);
         intent.putExtra("IS_ADMIN", admin);
         return intent;
+    }
+
+    private void updateSharedPreference() {
+        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+        SharedPreferences.Editor sharedPrefEditor = sharedPreferences.edit();
+        sharedPrefEditor.remove(getString(R.string.preference_file_key));
+        sharedPrefEditor.apply();
     }
 }

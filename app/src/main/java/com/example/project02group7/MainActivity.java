@@ -10,6 +10,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -40,8 +41,6 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        updateSharedPreference();
-
         // Get repository
         repository = RecipeRepository.getRepository(getApplication());
 
@@ -51,6 +50,26 @@ public class MainActivity extends AppCompatActivity {
         }
 
         // where update shared preference used to be
+        updateSharedPreference();
+
+        // update isLoggedInTextView
+        TextView isLoggedIn = binding.CurrentlyLoggedInTextView;
+
+        // get sharedPreferences
+        SharedPreferences sharedPreferences = getSharedPreferences(
+                getString(R.string.preference_file_key),
+                Context.MODE_PRIVATE
+        );
+        loggedInUserId = sharedPreferences.getInt(
+                getString(R.string.preference_userId_key),
+                LOGGED_OUT
+        );
+
+        if (loggedInUserId == LOGGED_OUT) {
+            isLoggedIn.setText("Not currently logged in");
+        } else {
+            loginUser(savedInstanceState);
+        }
 
         // login button
         Button loginButton = binding.MainActivityLoginButton;
