@@ -38,6 +38,8 @@ public class LandingPageActivity extends AppCompatActivity {
             return;
         }
 
+        updateSharedPreference();
+
         // show logged in username
         Intent intent = getIntent();
         username = intent.getStringExtra("USERNAME");
@@ -51,13 +53,15 @@ public class LandingPageActivity extends AppCompatActivity {
             }
         });
 
-
         // show is admin
         TextView isAdminTextView = binding.IsAdminTextView;
+        Button isAdminButton = binding.AdminButton;
         if (isAdmin) {
             isAdminTextView.setText("Yes");
+            isAdminButton.setVisibility(View.VISIBLE);
         } else {
             isAdminTextView.setText("No");
+            isAdminButton.setVisibility(View.INVISIBLE);
         }
 
         // implement functionality for logout button

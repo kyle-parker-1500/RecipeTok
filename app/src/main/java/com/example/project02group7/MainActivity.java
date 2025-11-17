@@ -49,25 +49,14 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        // where update shared preference used to be
         updateSharedPreference();
 
         // update isLoggedInTextView
         TextView isLoggedIn = binding.CurrentlyLoggedInTextView;
-
-        // get sharedPreferences
-        SharedPreferences sharedPreferences = getSharedPreferences(
-                getString(R.string.preference_file_key),
-                Context.MODE_PRIVATE
-        );
-        loggedInUserId = sharedPreferences.getInt(
-                getString(R.string.preference_userId_key),
-                LOGGED_OUT
-        );
-
         if (loggedInUserId == LOGGED_OUT) {
             isLoggedIn.setText("Not currently logged in");
         } else {
+            isLoggedIn.setText("Logged in");
             loginUser(savedInstanceState);
         }
 
@@ -76,6 +65,8 @@ public class MainActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // if already logged in
+
                 // send to login page
                 Intent intent = LoginActivity.loginIntentFactory(getApplicationContext());
                 startActivity(intent);
@@ -138,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         LiveData<User> userObserver = repository.getUserByUserId(loggedInUserId);
-        userObserver.observe(this, user1 -> {
+        userObserver.observe(this, user -> {
             if(user != null){
                 invalidateOptionsMenu();
             }
