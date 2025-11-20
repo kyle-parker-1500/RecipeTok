@@ -38,7 +38,7 @@ public class LandingPageActivity extends AppCompatActivity {
             return;
         }
 
-        updateSharedPreference();
+        updateSharedPreference(); // check where this is being called -> check where things are saved for persistence
 
         // show logged in username
         Intent intent = getIntent();
@@ -75,6 +75,14 @@ public class LandingPageActivity extends AppCompatActivity {
                 startActivity(intent);
                 // close current activity
                 finish();
+            }
+        });
+
+        Button adminButton = binding.AdminButton;
+        adminButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
             }
         });
     }
