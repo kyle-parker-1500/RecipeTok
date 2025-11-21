@@ -52,6 +52,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/passwordCreateAccountEditText"
         android:layout_marginTop="20dp"
-        android:backgroundTint="@color/my_button_color"
+        android:backgroundTint="@color/my_button_color" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
