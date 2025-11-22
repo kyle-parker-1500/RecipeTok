@@ -20,10 +20,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoginActivity"
-                  android:exported="true"/>
-        <activity android:name=".LandingPageActivity"
-                  android:exported="true"/>
+        <activity
+            android:name=".LoginActivity"
+            android:exported="true" />
+        <activity
+            android:name=".LandingPageActivity"
+            android:exported="true" />
     </application>
 
 </manifest>
