@@ -140,6 +140,8 @@ public class MainActivity extends AppCompatActivity {
                 invalidateOptionsMenu();
             }
         });
+        // after login info changed
+        updateSharedPreference();
     }
 
     /*
