@@ -14,7 +14,7 @@
         android:layout_marginStart="5dp"
         android:layout_marginBottom="4dp"
         android:backgroundTint="#fef7ff"
-        android:text="@string/sign_up"
+        android:text="@string/login_sign_up"
         android:textAlignment="viewStart"
         android:textColor="@color/my_button_color"
         android:textSize="20sp"
