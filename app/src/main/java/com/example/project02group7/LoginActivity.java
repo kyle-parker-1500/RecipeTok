@@ -79,12 +79,13 @@ public class LoginActivity extends AppCompatActivity {
 
             // now checking for username & password to be correct
             if(username.equals(user.getUsername()) && password.equals(user.getPassword())){
-                // update sharedPreferences with userId
-                updateSharedPreference(username);
 
                 // go to LandingPageActivity for this user
                 Intent intent = LandingPageActivity.landingPageIntentFactory(getApplicationContext(), user.getUsername(), user.isAdmin());
                 startActivity(intent);
+
+                // update sharedPreferences with userId
+                updateSharedPreference(username);
 
                 // close this activity
                 finish();
