@@ -51,8 +51,7 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        // todo: fix shared preferences by switching its position
-//        updateSharedPreference();
+        updateSharedPreference();
 
         // update isLoggedInTextView
         TextView isLoggedIn = binding.CurrentlyLoggedInTextView;
@@ -62,6 +61,9 @@ public class MainActivity extends AppCompatActivity {
             isLoggedIn.setText("Logged in");
             loginUser(savedInstanceState);
         }
+
+        // after loginUser called and info updated
+        updateSharedPreference();
 
         // login button
         Button loginButton = binding.MainActivityLoginButton;
@@ -103,6 +105,7 @@ public class MainActivity extends AppCompatActivity {
                 Context.MODE_PRIVATE
         );
 
+        // get check sharedPreferences saved userId
         loggedInUserId = sharedPreferences.getInt(
                 getString(R.string.preference_userId_key),
                 LOGGED_OUT
@@ -128,8 +131,7 @@ public class MainActivity extends AppCompatActivity {
 
         // If logged out still, go to login activity
         if(loggedInUserId == LOGGED_OUT){
-            //todo: uncomment startActivity if sharedPreferences issue not fixed
-//            startActivity(LoginActivity.loginIntentFactory(getApplicationContext()));
+            startActivity(LoginActivity.loginIntentFactory(getApplicationContext()));
             return;
         }
 
@@ -147,7 +149,7 @@ public class MainActivity extends AppCompatActivity {
     /*
         Saves the current loggedInUserId into SharedPreferences so it persists
         between app launches
-     */
+    */
     private void updateSharedPreference(){
         SharedPreferences sharedPreferences = getApplication()
                 .getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);

@@ -5,8 +5,8 @@
 <string name="password">Password</string>
 <string name="login_to_recipetok">Login to RecipeTok</string>
 <string name="log_in">Log in</string>
-<string name="preference_file_key">createdByVictor</string>
-<string name="preference_userId_key">CreatedByVictor</string>
+<string name="preference_file_key">loginPreferencesFileKey</string>
+<string name="preference_userId_key">loginUserIdKey</string>
 <string name="logged_ins">Logged in</string>
 <string name="landing_password">Password</string>
 <string name="landing_username">Username</string>
