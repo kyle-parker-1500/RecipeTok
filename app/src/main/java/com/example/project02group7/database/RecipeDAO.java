@@ -29,9 +29,13 @@ public interface RecipeDAO {
     @Query("SELECT * from " + RecipeDatabase.RECIPE_TABLE + " WHERE id == :recipeId")
     LiveData<Recipe> getRecipeByRecipeId(int recipeId);
 
-    // get actual liked & saved recipe data
+    // get actual liked recipe data
     @Query("SELECT title, description, instructions, ingredients FROM recipeTable INNER JOIN userLikedRecipesTable on userLikedRecipesTable.RecipeId = recipeTable.id")
     LiveData<List<Recipe>> getLikedRecipesForUser(int userId);
+
+    // get saved recipe data
+    @Query("SELECT title, description, instructions, ingredients FROM recipeTable INNER JOIN userSavedRecipesTable on userSavedRecipesTable.RecipeId = recipeTable.id")
+    LiveData<List<Recipe>> getSavedRecipesForUser(int userId);
 
     // may want to add finding methods for specific lists of ingredients
 }

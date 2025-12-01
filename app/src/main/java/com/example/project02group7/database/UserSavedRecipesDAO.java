@@ -27,8 +27,13 @@ public interface UserSavedRecipesDAO {
     @Query("DELETE from " + RecipeDatabase.USER_SAVED_RECIPES_TABLE)
     void deleteAll();
 
+    /**
+     * Use this when you want the full db object (I think that's how it's sent anyways).
+     * @param userId
+     * @return LiveData<List<UserLikedRecipes>>
+     */
     @Query("SELECT * from " + RecipeDatabase.USER_SAVED_RECIPES_TABLE + " WHERE userId == :userId")
-    LiveData<List<UserSavedRecipes>> getSavedRecipesForUserId(int userId);
+    LiveData<List<UserSavedRecipes>> getSavedRecipesByUserId(int userId);
 
     @Query("DELETE FROM " + RecipeDatabase.USER_SAVED_RECIPES_TABLE + " WHERE userId == :userId AND recipeId == :recipeId")
     void unsave(int userId, int recipeId);
