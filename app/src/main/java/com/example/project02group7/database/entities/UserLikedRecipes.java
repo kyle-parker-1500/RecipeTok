@@ -19,7 +19,7 @@ import java.util.Objects;
                         onDelete = ForeignKey.CASCADE // if parent col deleted, child cols deleted too
                 ),
                 @ForeignKey(
-                        entity = Recipes.class,
+                        entity = Recipe.class,
                         parentColumns = "id",
                         childColumns = "RecipeId",
                         onDelete = ForeignKey.CASCADE
@@ -37,6 +37,7 @@ public class UserLikedRecipes {
     private int RecipeId;
     private String instructions;
     private String ingredients;
+    // todo: consider adding imageUrl / timestamp (for later)
 
     // todo: find some way to list instructions & ingredients like SavedRecipes
 

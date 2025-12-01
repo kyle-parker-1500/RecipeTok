@@ -1,7 +1,5 @@
 package com.example.project02group7.database.entities;
 
-import androidx.annotation.NonNull;
-import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.Index;
@@ -22,7 +20,7 @@ import java.util.Objects;
                         onDelete = ForeignKey.CASCADE // if parent column deleted child cols deleted too
                 ),
                 @ForeignKey(
-                        entity = Recipes.class,
+                        entity = Recipe.class,
                         parentColumns = "id",
                         childColumns = "RecipeId",
                         onDelete = ForeignKey.CASCADE
@@ -44,10 +42,11 @@ public class UserSavedRecipes {
     private int RecipeId;
     private String instructions;
     private String ingredients;
+    // todo: consider adding imageUrl / timestamp (for later)
 
     // todo: need to list instructions & ingredients somehow
 
-    // todo: double check if other variables need to be initialized in constructor
+    // todo: double check if other variables need to be initialized in constructor (think they're initialized elsewhere)
     public UserSavedRecipes() {
         // initialize only what may be null
         instructions = "";

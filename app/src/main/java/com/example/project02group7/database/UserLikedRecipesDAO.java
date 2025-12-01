@@ -14,10 +14,10 @@ import java.util.List;
 @Dao
 public interface UserLikedRecipesDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insert(UserLikedRecipes... userLikedRecipes);
+    void insert(UserLikedRecipes... likedRecipes);
 
     @Delete
-    void delete(UserLikedRecipes userLikedRecipes);
+    void delete(UserLikedRecipes likedRecipes);
 
     @Query("SELECT * FROM " + RecipeDatabase.USER_LIKED_RECIPES_TABLE + " ORDER BY id")
     LiveData<List<UserLikedRecipes>> getAllUserLikedRecipes();
@@ -26,7 +26,11 @@ public interface UserLikedRecipesDAO {
     void deleteAll();
 
     @Query("SELECT * from " + RecipeDatabase.USER_LIKED_RECIPES_TABLE + " WHERE userId == :searchUserId")
-    LiveData<UserLikedRecipes> getUserLikedRecipesByUserId(int searchUserId);
+    LiveData<List<UserLikedRecipes>> getLikedRecipesByUserId(int searchUserId);
+
+    // removes item from database if unliked
+    @Query("DELETE FROM " + RecipeDatabase.USER_LIKED_RECIPES_TABLE + " WHERE userId == :userId AND recipeId == :recipeId")
+    void unlike(int userId, int recipeId);
 
     // may want to add finding methods for specific lists of ingredients
 }

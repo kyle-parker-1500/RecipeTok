@@ -15,10 +15,10 @@ import java.util.List;
 public interface UserSavedRecipesDAO {
     // todo: revisit conflict strategy & determine if it works
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insert(UserSavedRecipes... userSavedRecipes);
+    void insert(UserSavedRecipes... savedRecipes);
 
     @Delete
-    void delete(UserSavedRecipes userSavedRecipes);
+    void delete(UserSavedRecipes savedRecipes);
 
     // saved in ascending order by default
     @Query("SELECT * FROM " + RecipeDatabase.USER_SAVED_RECIPES_TABLE + " ORDER BY id")
@@ -27,7 +27,9 @@ public interface UserSavedRecipesDAO {
     @Query("DELETE from " + RecipeDatabase.USER_SAVED_RECIPES_TABLE)
     void deleteAll();
 
-    @Query("SELECT * from " + RecipeDatabase.USER_SAVED_RECIPES_TABLE + " WHERE userId == :searchUserId")
-    LiveData<UserSavedRecipes> getUserSavedRecipesByUserId(int searchUserId);
+    @Query("SELECT * from " + RecipeDatabase.USER_SAVED_RECIPES_TABLE + " WHERE userId == :userId")
+    LiveData<List<UserSavedRecipes>> getSavedRecipesForUserId(int userId);
 
+    @Query("DELETE FROM " + RecipeDatabase.USER_SAVED_RECIPES_TABLE + " WHERE userId == :userId AND recipeId == :recipeId")
+    void unsave(int userId, int recipeId);
 }
