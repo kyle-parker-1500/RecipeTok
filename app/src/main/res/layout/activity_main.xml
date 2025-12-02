@@ -7,54 +7,24 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/ApplicationTitleTextView"
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:layout_margin="16dp"
-        android:layout_marginBottom="10dp"
-        android:gravity="center"
-        android:text="@string/mainactivity_recipetok"
-        android:textColor="@color/black"
-        android:textSize="40sp"
-        android:textStyle="bold"
+    <FrameLayout
+        android:id="@+id/mainFragment"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/bottomNavigationView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/CurrentlyLoggedInTextView"
-        android:layout_width="wrap_content"
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
-        android:gravity="center"
-        android:text="@string/mainactivity_loggedin"
-        android:textColor="@color/grey"
-        android:textSize="16sp"
+        app:labelVisibilityMode="labeled"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ApplicationTitleTextView" />
+        app:menu="@menu/bottom_nav_menu" />
 
-    <Button
-        android:id="@+id/MainActivityLoginButton"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:layout_margin="16dp"
-        android:backgroundTint="@color/my_button_color"
-        android:text="@string/log_in"
-        android:textSize="32sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/CurrentlyLoggedInTextView" />
-
-    <Button
-        android:id="@+id/MainActivityCreateAccountButton"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:layout_margin="16dp"
-        android:backgroundTint="@color/my_create_account_button_color"
-        android:text="@string/mainactivity_createaccount"
-        android:textSize="32sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/MainActivityLoginButton" /></androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

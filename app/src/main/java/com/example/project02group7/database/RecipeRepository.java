@@ -8,7 +8,6 @@ import androidx.lifecycle.LiveData;
 import com.example.project02group7.MainActivity;
 import com.example.project02group7.database.entities.User;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
