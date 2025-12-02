@@ -16,6 +16,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
 
 import com.example.project02group7.database.RecipeRepository;
@@ -38,6 +39,12 @@ public class MainActivity extends AppCompatActivity {
     private int loggedInUserId = LOGGED_OUT;
     private User user;
 
+    // Fragments for bottom navigation
+    private Fragment homeFragment;
+    private Fragment recipeFragment;
+    private Fragment accountFragment;
+    private Fragment settingsFragment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,7 +59,8 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        updateSharedPreference();
+        // figure out who is logged in (redirect to LoginActivity if nobody)
+        loginUser(savedInstanceState);
 
         // update isLoggedInTextView
         TextView isLoggedIn = binding.CurrentlyLoggedInTextView;
