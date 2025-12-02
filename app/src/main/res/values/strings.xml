@@ -26,4 +26,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="home_fragment">Home Fragment</string>
+    <string name="account_fragment">Account Fragment</string>
+    <string name="recipe_fragment">Recipe Fragment</string>
+    <string name="settings_fragment">Settings Fragment</string>
 </resources>
