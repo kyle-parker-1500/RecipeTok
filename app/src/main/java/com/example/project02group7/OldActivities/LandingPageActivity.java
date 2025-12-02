@@ -1,4 +1,4 @@
-package com.example.project02group7;
+package com.example.project02group7.OldActivities;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,11 +12,10 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
 
+import com.example.project02group7.R;
 import com.example.project02group7.database.RecipeRepository;
 import com.example.project02group7.database.entities.User;
 import com.example.project02group7.databinding.ActivityLandingPageBinding;
-
-import org.w3c.dom.Text;
 
 public class LandingPageActivity extends AppCompatActivity {
     private static final String LANDING_PAGE_ACTIVITY_USER_ID = "com.example.project02group7.LANDING_PAGE_ACTIVITY_USER_ID";

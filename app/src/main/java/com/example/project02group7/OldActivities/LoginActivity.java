@@ -1,4 +1,4 @@
-package com.example.project02group7;
+package com.example.project02group7.OldActivities;
 
 import android.content.Context;
 import android.content.Intent;
@@ -7,10 +7,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
 
+import com.example.project02group7.R;
 import com.example.project02group7.database.RecipeRepository;
 import com.example.project02group7.database.entities.User;
 import com.example.project02group7.databinding.ActivityLoginBinding;

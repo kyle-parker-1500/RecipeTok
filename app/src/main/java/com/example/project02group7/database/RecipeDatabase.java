@@ -10,7 +10,7 @@ import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-import com.example.project02group7.MainActivity;
+import com.example.project02group7.OldActivities.MainActivity;
 import com.example.project02group7.database.entities.User;
 import com.example.project02group7.database.typeConverters.LocalDateTypeConverter;
 

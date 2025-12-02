@@ -13,6 +13,9 @@
         android:theme="@style/Theme.Project02Group7">
         <activity
             android:name=".MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".OldActivities.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,10 +24,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".LoginActivity"
+            android:name=".OldActivities.LoginActivity"
             android:exported="true" />
         <activity
-            android:name=".LandingPageActivity"
+            android:name=".OldActivities.LandingPageActivity"
             android:exported="true" />
     </application>
 
