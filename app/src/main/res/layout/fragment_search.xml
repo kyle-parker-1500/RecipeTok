@@ -6,11 +6,10 @@
     android:background="@color/black"
     tools:context=".SettingFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/setting_fragment"
+        android:text="Search fragment"
         android:textSize="34sp"
         android:layout_gravity="center"/>
 
