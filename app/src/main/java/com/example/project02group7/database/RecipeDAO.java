@@ -30,11 +30,11 @@ public interface RecipeDAO {
     LiveData<Recipe> getRecipeByRecipeId(int recipeId);
 
     // get actual liked recipe data
-    @Query("SELECT title, description, instructions, ingredients FROM recipeTable INNER JOIN userLikedRecipesTable on userLikedRecipesTable.RecipeId = recipeTable.id")
+    @Query("SELECT recipeTable.id, recipeTable.title, recipeTable.description, recipeTable.instructions, recipeTable.ingredients FROM recipeTable INNER JOIN userLikedRecipesTable on userLikedRecipesTable.RecipeId == recipeTable.id WHERE userLikedRecipesTable.userId == :userId")
     LiveData<List<Recipe>> getLikedRecipesForUser(int userId);
 
     // get saved recipe data
-    @Query("SELECT title, description, instructions, ingredients FROM recipeTable INNER JOIN userSavedRecipesTable on userSavedRecipesTable.RecipeId = recipeTable.id")
+    @Query("SELECT recipeTable.id, recipeTable.title, recipeTable.description, recipeTable.instructions, recipeTable.ingredients FROM recipeTable INNER JOIN userSavedRecipesTable on userSavedRecipesTable.RecipeId == recipeTable.id WHERE userSavedRecipesTable.userId == :userId")
     LiveData<List<Recipe>> getSavedRecipesForUser(int userId);
 
     // may want to add finding methods for specific lists of ingredients

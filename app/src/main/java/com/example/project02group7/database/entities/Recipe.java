@@ -22,6 +22,7 @@ public class Recipe {
     private String description;
     //todo: implement this later (don't forget to update erd) -> private String imageFile;
     private String instructions;
+    // may want ingredients to be an List or ArrayList not String
     private String ingredients;
 
     public Recipe() {

@@ -8,6 +8,7 @@ import androidx.lifecycle.LiveData;
 import com.example.project02group7.MainActivity;
 import com.example.project02group7.database.entities.Recipe;
 import com.example.project02group7.database.entities.User;
+import com.example.project02group7.database.entities.UserLikedRecipes;
 
 import java.util.List;
 import java.util.concurrent.Callable;
@@ -116,4 +117,45 @@ public class RecipeRepository {
         return recipeDAO.getAllRecipes();
     }
 
+    /**
+     * Description: Returns a recipe of type Recipe that is at the specified recipeId
+     * @param recipeId an int
+     * @return LiveData<Recipe>
+     */
+    public LiveData<Recipe> getRecipeByRecipeId(int recipeId) {
+        return recipeDAO.getRecipeByRecipeId(recipeId);
+    }
+
+    // user liked recipes section
+
+    /**
+     * Description: A method that takes any number of recipes liked by a user and inserts them into the userLiked recipe
+     * table of the database.
+     * @param userLikedRecipes a Recipe
+     */
+    public void insertUserLikedRecipes(UserLikedRecipes... userLikedRecipes) {
+        RecipeDatabase.databaseWriteExecutor.execute(() -> {
+            userLikedRecipesDAO.insert(userLikedRecipes);
+        });
+    }
+
+    // todo: write unlike method for user & delete methods for admin
+
+    /**
+     * Description: A method that returns a list of type LiveData that returns a list of all userLikedRecipes.
+     * @return LiveData<List<UserLikedRecipes>>
+     */
+    public LiveData<List<UserLikedRecipes>> getAllUserLikedRecipes() {
+        return userLikedRecipesDAO.getAllUserLikedRecipes();
+    }
+
+    // gets recipe data by user id
+    /**
+     * Description: Returns a recipe of type Recipe that is at the specified userId
+     * @param userId an int
+     * @return LiveData<List<Recipe>>
+     */
+    public LiveData<List<Recipe>> getLikedRecipesForUser(int userId) {
+        return recipeDAO.getLikedRecipesForUser(userId);
+    }
 }

@@ -14,10 +14,10 @@ import java.util.List;
 @Dao
 public interface UserLikedRecipesDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insert(UserLikedRecipes... likedRecipes);
+    void insert(UserLikedRecipes... userLikedRecipes);
 
     @Delete
-    void delete(UserLikedRecipes likedRecipes);
+    void delete(UserLikedRecipes userLikedRecipes);
 
     @Query("SELECT * FROM " + RecipeDatabase.USER_LIKED_RECIPES_TABLE + " ORDER BY id")
     LiveData<List<UserLikedRecipes>> getAllUserLikedRecipes();

@@ -11,14 +11,24 @@ import androidx.room.TypeConverters;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.example.project02group7.MainActivity;
+import com.example.project02group7.database.entities.Recipe;
 import com.example.project02group7.database.entities.User;
+import com.example.project02group7.database.entities.UserLikedRecipes;
+import com.example.project02group7.database.entities.UserSavedRecipes;
 import com.example.project02group7.database.typeConverters.LocalDateTypeConverter;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 @TypeConverters(LocalDateTypeConverter.class)
-@Database(entities = {User.class}, version = 1, exportSchema = false)
+@Database(entities = {
+        User.class,
+        Recipe.class,
+        UserLikedRecipes.class,
+        UserSavedRecipes.class
+        },
+        version = 2, // updated from v1
+        exportSchema = false)
 public abstract class RecipeDatabase extends RoomDatabase {
     public static final String USER_TABLE = "userTable";
     // todo: implement next three tables
@@ -68,21 +78,30 @@ public abstract class RecipeDatabase extends RoomDatabase {
             super.onCreate(db);
             Log.i(MainActivity.TAG, "DATABASE CREATED!");
             databaseWriteExecutor.execute(() -> {
-                UserDAO dao = INSTANCE.userDAO();
-                dao.deleteAll();
+                UserDAO userDao = INSTANCE.userDAO();
+                RecipeDAO recipeDao = INSTANCE.recipeDAO();
+                UserLikedRecipesDAO likedDao = INSTANCE.userLikedRecipesDAO();
+                UserSavedRecipesDAO savedDao = INSTANCE.userSavedRecipesDAO();
+
+                // clear user db when recreating db
+                userDao.deleteAll();
 
                 User admin = new User("admin2", "admin2");
                 admin.setAdmin(true);
-                dao.insert(admin);
+                userDao.insert(admin);
 
                 User testUser1 = new User("testuser1", "testuser1");
-                dao.insert(testUser1);
+                userDao.insert(testUser1);
             });
         }
     };
+
     // daos -> for room to handle
     public abstract UserDAO userDAO();
+
     public abstract RecipeDAO recipeDAO();
+
     public abstract UserLikedRecipesDAO userLikedRecipesDAO();
+
     public abstract UserSavedRecipesDAO userSavedRecipesDAO();
 }
