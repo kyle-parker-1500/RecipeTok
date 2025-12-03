@@ -87,7 +87,7 @@ public class LoginActivity extends AppCompatActivity {
                     isAdmin
             );
             startActivity(intent);
-            updateSharedPreference(usernameInput);
+            updateSharedPreference(user.getId());
             finish();
         });
     }
@@ -101,28 +101,13 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     // need to update shared preferences where they are being changed for persistence
-    private void updateSharedPreference(String username) {
-        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+    // Updated parameter from String to int
+    private void updateSharedPreference(int userId) {
+        SharedPreferences sharedPreferences = getApplicationContext()
+                .getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
         SharedPreferences.Editor sharedPrefEditor = sharedPreferences.edit();
         // need a way to access username
-        int userId = getUserIdByUsername(username);
         sharedPrefEditor.putInt(getString(R.string.preference_userId_key), userId);
         sharedPrefEditor.apply();
-    }
-
-    /**
-     * Method for finding userid by username in database.
-     * @return int - userId
-     */
-    private int getUserIdByUsername(String username) {
-        // returns LiveData, need it to convert to int
-        int userId;
-        User dbUserId = repository.getUserByUsername(username).getValue();
-
-        // get user id
-        assert dbUserId != null;
-        userId = dbUserId.getId();
-
-        return userId;
     }
 }
