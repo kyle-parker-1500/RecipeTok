@@ -6,6 +6,7 @@ import android.util.Log;
 import androidx.lifecycle.LiveData;
 
 import com.example.project02group7.MainActivity;
+import com.example.project02group7.database.entities.Recipe;
 import com.example.project02group7.database.entities.User;
 
 import java.util.List;
@@ -14,7 +15,9 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
 public class RecipeRepository {
-    private
+    private RecipeDAO recipeDAO;
+    private UserLikedRecipesDAO userLikedRecipesDAO;
+    private UserSavedRecipesDAO userSavedRecipesDAO;
     private final UserDAO userDAO;
 //    private ArrayList<String> allUsers;
 
@@ -23,6 +26,9 @@ public class RecipeRepository {
     // constructor
     private RecipeRepository(Application application) {
         RecipeDatabase db = RecipeDatabase.getDatabase(application);
+        this.recipeDAO = db.recipeDAO();
+        this.userLikedRecipesDAO = db.userLikedRecipesDAO();
+        this.userSavedRecipesDAO = db.userSavedRecipesDAO();
         this.userDAO = db.userDAO();
     }
 
@@ -88,4 +94,26 @@ public class RecipeRepository {
     public LiveData<User> getUserByUserId(int userId) {
         return userDAO.getUserByUserId(userId);
     }
+
+    // recipes section of repository
+
+    /**
+     * Description: A method that takes any number of recipes and inserts them into the Recipe table of the
+     * database.
+     * @param recipe a Recipe
+     */
+    public void insertRecipe(Recipe... recipe) {
+        RecipeDatabase.databaseWriteExecutor.execute(() -> {
+            recipeDAO.insert(recipe);
+        });
+    }
+
+    /**
+     * Description: A method that returns a list of type LiveData that returns a list of all recipes.
+     * @return LiveData<List<Recipe>>
+     */
+    public LiveData<List<Recipe>> getListOfAllRecipes() {
+        return recipeDAO.getAllRecipes();
+    }
+
 }

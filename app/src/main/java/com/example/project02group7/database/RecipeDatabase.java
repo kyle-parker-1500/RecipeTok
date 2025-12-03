@@ -82,4 +82,7 @@ public abstract class RecipeDatabase extends RoomDatabase {
     };
     // daos -> for room to handle
     public abstract UserDAO userDAO();
+    public abstract RecipeDAO recipeDAO();
+    public abstract UserLikedRecipesDAO userLikedRecipesDAO();
+    public abstract UserSavedRecipesDAO userSavedRecipesDAO();
 }
