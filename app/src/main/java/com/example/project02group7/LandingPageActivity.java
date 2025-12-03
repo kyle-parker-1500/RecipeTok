@@ -10,21 +10,30 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
 
 import com.example.project02group7.database.RecipeRepository;
 import com.example.project02group7.database.entities.User;
 import com.example.project02group7.databinding.ActivityLandingPageBinding;
-
-import org.w3c.dom.Text;
+import com.google.android.material.bottomnavigation.BottomNavigationItemView;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class LandingPageActivity extends AppCompatActivity {
-    private static final String LANDING_PAGE_ACTIVITY_USER_ID = "com.example.project02group7.LANDING_PAGE_ACTIVITY_USER_ID";
+    private static final String LANDING_PAGE_ACTIVITY_USER_ID =
+            "com.example.project02group7.LANDING_PAGE_ACTIVITY_USER_ID";
     private ActivityLandingPageBinding binding;
     private RecipeRepository repository;
     private String username;
     boolean isAdmin;
     private User user;
+
+    // Fragments for bottom navigation
+    private Fragment homeFragment;
+    private Fragment recipeFragment;
+    private Fragment accountFragment;
+    private Fragment settingsFragment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,13 +47,12 @@ public class LandingPageActivity extends AppCompatActivity {
             return;
         }
 
-        updateSharedPreference(); // check where this is being called -> check where things are saved for persistence
-
-        // show logged in username
+        // Get login info from Intent
         Intent intent = getIntent();
         username = intent.getStringExtra("USERNAME");
         isAdmin = intent.getBooleanExtra("IS_ADMIN", false);
 
+        // Showing username (header)
         TextView usernameTextView = binding.UsernameTextView;
         LiveData<User> usernameObserver = repository.getUserByUsername(username);
         usernameObserver.observe(this, user -> {
@@ -53,7 +61,7 @@ public class LandingPageActivity extends AppCompatActivity {
             }
         });
 
-        // show is admin
+        // Show admin status (header)
         TextView isAdminTextView = binding.IsAdminTextView;
         Button isAdminButton = binding.AdminButton;
         if (isAdmin) {
@@ -69,10 +77,13 @@ public class LandingPageActivity extends AppCompatActivity {
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                updateSharedPreference();
-                Intent intent = MainActivity.mainActivityIntentFactory(getApplicationContext(), user.getId());
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
+                clearUserFromSharedPreferences();
+
+                Intent backToMain = MainActivity.mainActivityIntentFactory(
+                        getApplicationContext(), user.getId()
+                );
+                backToMain.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(backToMain);
                 // close current activity
                 finish();
             }
@@ -82,9 +93,62 @@ public class LandingPageActivity extends AppCompatActivity {
         adminButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                // TODO: open your admin screen / fragment? here
             }
         });
+
+        // Bottom navigation + fragments
+        BottomNavigationView bottomNavigationItemView = binding.bottomNavigationView;
+
+        // Create fragment instances
+        homeFragment = new HomeFragment();
+        recipeFragment = new RecipeFragment();
+        accountFragment = new AccountFragment();
+        settingsFragment = new SettingsFragment();
+
+        // Initial Fragment
+        setCurrentFragment(homeFragment);
+        bottomNavigationItemView.setSelectedItemId(R.id.home);
+
+        // Handle bottom nav selection
+        bottomNavigationItemView.setOnItemSelectedListener(item ->{
+           int id = item.getItemId();
+
+           if(id == R.id.home){
+               setCurrentFragment(homeFragment);
+           }
+           else if(id == R.id.recipe){
+               setCurrentFragment(recipeFragment);
+           }
+           else if(id == R.id.profile){
+               setCurrentFragment(accountFragment);
+           }
+           else if(id == R.id.setting){
+               setCurrentFragment(settingsFragment);
+           }
+           return true;
+        });
+    }
+
+    /**
+     *  Replace fragment in the LandingPageActivity container
+     */
+    private void setCurrentFragment(Fragment fragment){
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.mainFragment, fragment)
+                .commit();
+    }
+
+    /**
+     * Clears the user from SharedPreferences on logout
+     */
+    private void clearUserFromSharedPreferences(){
+        SharedPreferences sharedPreferences = getApplicationContext()
+                .getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.remove(getString(R.string.preference_userId_key));
+        editor.apply();
     }
 
     static Intent landingPageIntentFactory(Context applicationContext, String username, boolean admin) {
@@ -93,12 +157,5 @@ public class LandingPageActivity extends AppCompatActivity {
         intent.putExtra("USERNAME", username);
         intent.putExtra("IS_ADMIN", admin);
         return intent;
-    }
-
-    private void updateSharedPreference() {
-        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
-        SharedPreferences.Editor sharedPrefEditor = sharedPreferences.edit();
-        sharedPrefEditor.remove(getString(R.string.preference_file_key));
-        sharedPrefEditor.apply();
     }
 }

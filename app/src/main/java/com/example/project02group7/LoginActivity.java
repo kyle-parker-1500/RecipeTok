@@ -35,10 +35,10 @@ public class LoginActivity extends AppCompatActivity {
 
         // Login button
         binding.loginButton.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View view){
-               verifyUser();
-           }
+            @Override
+            public void onClick(View view){
+                verifyUser();
+            }
         });
 
         // binding.createAccountButton.setOnClickListener (when needed?)

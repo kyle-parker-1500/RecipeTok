@@ -28,9 +28,10 @@ public class MainActivity extends AppCompatActivity {
     private static final String MAIN_ACTIVITY_USER_ID =
             "com.example.project02group7.MAIN_ACTIVITY_USER_ID";
     static final String SHARED_PREFERENCE_USERID_KEY =
-           "com.example.project02group7.SHARED_PREFERENCE_USERID_KEY";
+            "com.example.project02group7.SHARED_PREFERENCE_USERID_KEY";
     //todo: figure out where saved_instance_state_userid_key is pulling from -kyle
-    static final String SAVED_INSTANCE_STATE_USERID_KEY = "com.example.project02group7.SAVED_INSTANCE_STATE_USERID_KEY";
+    static final String SAVED_INSTANCE_STATE_USERID_KEY =
+            "com.example.project02group7.SAVED_INSTANCE_STATE_USERID_KEY";
     private static final int LOGGED_OUT = -1;
     private ActivityMainBinding binding;
     private RecipeRepository repository;
@@ -63,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         // after loginUser called and info updated
+        // todo: update this to be inside else statement - maybe (check with debug)
         updateSharedPreference();
 
         // login button
