@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
@@ -52,32 +53,19 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        updateSharedPreference();
+        loginUser(savedInstanceState);
 
-        // update isLoggedInTextView
         TextView isLoggedIn = binding.CurrentlyLoggedInTextView;
-        if (loggedInUserId == LOGGED_OUT) {
-            isLoggedIn.setText("Not currently logged in");
-        } else {
-            isLoggedIn.setText("Logged in");
-            loginUser(savedInstanceState);
-        }
-
-        // after loginUser called and info updated
-        // todo: update this to be inside else statement - maybe (check with debug)
-        updateSharedPreference();
+        isLoggedIn.setText("Not currently logged in");
 
         // login button
         Button loginButton = binding.MainActivityLoginButton;
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // if already logged in
-
                 // send to login page
-                Intent intent = LoginActivity.loginIntentFactory(getApplicationContext());
+                Intent intent = LoginActivity.loginIntentFactory(MainActivity.this);
                 startActivity(intent);
-                updateSharedPreference();
             }
         });
 
@@ -93,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /*
+        @Nullable means the parameter can be null
         Decides who is logged in:
         SharedPreferences
         savedInstanceState (rotation, or recreating app)
@@ -100,53 +89,72 @@ public class MainActivity extends AppCompatActivity {
 
         If still LOGGED_OUT after all, send user to LoginActivity
      */
-    private void loginUser(Bundle savedInstanceState) {
-
-        // Try SharedPreferences
+    private void loginUser(@Nullable Bundle savedInstanceState) {
         SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(
                 getString(R.string.preference_file_key),
                 Context.MODE_PRIVATE
         );
 
-        // get check sharedPreferences saved userId
+        // 1 -> Try SharedPreferences
         loggedInUserId = sharedPreferences.getInt(
                 getString(R.string.preference_userId_key),
                 LOGGED_OUT
         );
 
-        // Try savedInstanceState
+        // 2 -> Try savedInstanceState (e.g. after rotation)
         if(loggedInUserId == LOGGED_OUT
                 && savedInstanceState != null
-                && savedInstanceState.containsKey(SHARED_PREFERENCE_USERID_KEY)){
+                && savedInstanceState.containsKey(SAVED_INSTANCE_STATE_USERID_KEY)){
+
             loggedInUserId = savedInstanceState.getInt(
                     SAVED_INSTANCE_STATE_USERID_KEY,
                     LOGGED_OUT
             );
         }
 
-        // Try Intent extra from LoginActivity
-        if(loggedInUserId == LOGGED_OUT){
+        // 3 -> Try Intent extra from LoginActivity (first time launch)
+        if (loggedInUserId == LOGGED_OUT){
             loggedInUserId = getIntent().getIntExtra(
-                    MAIN_ACTIVITY_USER_ID,
+                    "MAIN_ACTIVITY_USER_ID",
                     LOGGED_OUT
             );
+
+            if(loggedInUserId != LOGGED_OUT){
+                sharedPreferences.edit()
+                        .putInt(getString(R.string.preference_userId_key), loggedInUserId)
+                        .apply();
+            }
         }
 
-        // If logged out still, go to login activity
-        if(loggedInUserId == LOGGED_OUT){
-            startActivity(LoginActivity.loginIntentFactory(getApplicationContext()));
+        // 4 -> Still logged out? Go to LoginActivity
+        if (loggedInUserId == LOGGED_OUT){
             return;
         }
 
+        // 5 -> We have a valid userId = observe the user
         LiveData<User> userObserver = repository.getUserByUserId(loggedInUserId);
-        userObserver.observe(this, user -> {
-            this.user = user;
-            if(user != null){
-                invalidateOptionsMenu();
+        userObserver.observe(this, user ->{
+            if(user == null){
+                sharedPreferences.edit()
+                        .remove(getString(R.string.preference_userId_key))
+                        .apply();
+                startActivity(LoginActivity.loginIntentFactory(this));
+                finish();
+                return;
             }
+
+            this.user = user;
+            invalidateOptionsMenu();
+
+            boolean isAdmin = user.isAdmin();
+            Intent intent = LandingPageActivity.landingPageIntentFactory(
+                    MainActivity.this,
+                    user.getUsername(),
+                    isAdmin
+            );
+            startActivity(intent);
+            finish();
         });
-        // after login info changed
-        updateSharedPreference();
     }
 
     /*
@@ -219,6 +227,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(LoginActivity.loginIntentFactory(getApplicationContext()));
     }
 
+    @Override
     protected void onSaveInstanceState(@NonNull Bundle outState){
         super.onSaveInstanceState(outState);
         outState.putInt(SHARED_PREFERENCE_USERID_KEY, loggedInUserId);
