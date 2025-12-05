@@ -115,7 +115,8 @@ public abstract class RecipeDatabase extends RoomDatabase {
 
                 // add recipes to database using okhttp
                 client.newCall(request).enqueue(new okhttp3.Callback() {
-                    public void onResponse(Call call, Response response) {
+                    @Override
+                    public void onResponse(@NonNull Call call, @NonNull Response response) {
                         // debugging
                         Log.i(MainActivity.TAG, "API call succeeded!");
 
