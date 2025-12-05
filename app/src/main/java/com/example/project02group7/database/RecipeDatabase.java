@@ -91,9 +91,6 @@ public abstract class RecipeDatabase extends RoomDatabase {
             super.onCreate(db);
             Log.i(MainActivity.TAG, "DATABASE CREATED!");
             databaseWriteExecutor.execute(() -> {
-                // debugging
-                Log.i(MainActivity.TAG, "About to make API call");
-
                 UserDAO userDao = INSTANCE.userDAO();
                 RecipeDAO recipeDao = INSTANCE.recipeDAO();
                 UserLikedRecipesDAO likedDao = INSTANCE.userLikedRecipesDAO();
@@ -102,6 +99,7 @@ public abstract class RecipeDatabase extends RoomDatabase {
                 // clear user db when recreating db
                 userDao.deleteAll();
 
+                // define default users
                 User admin = new User("admin2", "admin2");
                 admin.setAdmin(true);
                 userDao.insert(admin);
@@ -117,9 +115,6 @@ public abstract class RecipeDatabase extends RoomDatabase {
                 client.newCall(request).enqueue(new okhttp3.Callback() {
                     @Override
                     public void onResponse(@NonNull Call call, @NonNull Response response) {
-                        // debugging
-                        Log.i(MainActivity.TAG, "API call succeeded!");
-
                         // define recipe columns
                         String title, ingredients, instructions;
                         // define recipe object
