@@ -52,49 +52,9 @@ public class LandingPageActivity extends AppCompatActivity {
         username = intent.getStringExtra("USERNAME");
         isAdmin = intent.getBooleanExtra("IS_ADMIN", false);
 
-        // Showing username (header)
-        TextView usernameTextView = binding.UsernameTextView;
         LiveData<User> usernameObserver = repository.getUserByUsername(username);
         usernameObserver.observe(this, user -> {
-            if (user != null) {
-                usernameTextView.setText(user.getUsername());
-            }
-        });
-
-        // Show admin status (header)
-        TextView isAdminTextView = binding.IsAdminTextView;
-        Button isAdminButton = binding.AdminButton;
-        if (isAdmin) {
-            isAdminTextView.setText("Yes");
-            isAdminButton.setVisibility(View.VISIBLE);
-        } else {
-            isAdminTextView.setText("No");
-            isAdminButton.setVisibility(View.INVISIBLE);
-        }
-
-        // implement functionality for logout button
-        Button logoutButton = binding.LogoutButton;
-        logoutButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                clearUserFromSharedPreferences();
-
-                Intent backToMain = MainActivity.mainActivityIntentFactory(
-                        getApplicationContext(), -1
-                );
-                backToMain.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(backToMain);
-                // close current activity
-                finish();
-            }
-        });
-
-        Button adminButton = binding.AdminButton;
-        adminButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // TODO: open your admin screen / fragment? here
-            }
+            this.user = user;
         });
 
         // Bottom navigation + fragments
@@ -103,7 +63,7 @@ public class LandingPageActivity extends AppCompatActivity {
         // Create fragment instances
         homeFragment = new HomeFragment();
         recipeFragment = new RecipeFragment();
-        accountFragment = new AccountFragment();
+        accountFragment = AccountFragment.newInstance(username, isAdmin);
         settingsFragment = new SettingsFragment();
 
         // Initial Fragment
@@ -138,17 +98,6 @@ public class LandingPageActivity extends AppCompatActivity {
                 .beginTransaction()
                 .replace(R.id.mainFragment, fragment)
                 .commit();
-    }
-
-    /**
-     * Clears the user from SharedPreferences on logout
-     */
-    private void clearUserFromSharedPreferences(){
-        SharedPreferences sharedPreferences = getApplicationContext()
-                .getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.remove(getString(R.string.preference_userId_key));
-        editor.apply();
     }
 
     static Intent landingPageIntentFactory(Context applicationContext, String username, boolean admin) {
