@@ -33,6 +33,7 @@ public class InnerRecipeViewHolder extends RecyclerView.ViewHolder {
             // display title and ingredients
             titleViewItem.setText(recipe.getTitle());
             ingredientViewItem.setText(recipe.getIngredients());
+            ingredientViewItem.setMovementMethod(new ScrollingMovementMethod());
         } else {
             // inside card 2:
             // display only instructions
