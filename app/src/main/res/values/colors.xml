@@ -5,4 +5,6 @@
     <color name="my_button_color">#FC0349</color>
     <color name="grey">#2B2D30</color>
     <color name="my_create_account_button_color">#5B5B5B</color>
+    <color name="my_home_background_color">#D4C5A5</color>
+    <color name="my_home_text_color">#3C3C3C</color>
 </resources>
