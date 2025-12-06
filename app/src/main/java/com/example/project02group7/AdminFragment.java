@@ -1,8 +1,5 @@
 package com.example.project02group7;
 
-import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -13,9 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
-
 
 public class AdminFragment extends Fragment {
 
@@ -27,23 +21,18 @@ public class AdminFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_admin, container, false);
 
-        Button manageRecipesButton = view.findViewById(R.id.manageRecipesButton);
         Button viewUsersButton = view.findViewById(R.id.viewUsersButton);
-        Button removeUsersButton = view.findViewById(R.id.removeUsersButton);
+        Button backToAccountButton = view.findViewById(R.id.goBackButton);
 
-        manageRecipesButton.setOnClickListener(v ->{
-            // TODO: open RecipeManager or Activity
-            Toast.makeText(requireContext(), "It works!", Toast.LENGTH_SHORT).show();
-        });
 
         viewUsersButton.setOnClickListener(v ->{
-            // TODO: Open ViewUsersFragment or Activity
-            Toast.makeText(requireContext(), "It works too!", Toast.LENGTH_SHORT).show();
+            LandingPageActivity activity = (LandingPageActivity) requireActivity();
+            activity.openUserFragment();
         });
 
-        removeUsersButton.setOnClickListener(v ->{
-            // TODO: Open remove users from app
-            Toast.makeText(requireContext(), "It also works!", Toast.LENGTH_SHORT).show();
+        backToAccountButton.setOnClickListener(v ->{
+            LandingPageActivity activity = (LandingPageActivity) requireActivity();
+            activity.openAccountFragment();
         });
 
         return view;
