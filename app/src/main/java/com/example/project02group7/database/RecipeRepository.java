@@ -67,6 +67,16 @@ public class RecipeRepository {
         });
     }
 
+    /**
+     * Description: A void method that deletes any number of users passed into the database.
+     * @param user a User object
+     */
+    public void deleteUser(User user) {
+        RecipeDatabase.databaseWriteExecutor.execute(() -> {
+            userDAO.delete(user);
+        });
+    }
+
     // may not want this public
 
     /**
@@ -142,7 +152,7 @@ public class RecipeRepository {
     // todo: write unlike method for user & delete methods for admin
 
     /**
-     * Description: A method that returns a list of type LiveData that returns a list of all userLikedRecipes.
+     * Description: A method that returns a list of     type LiveData that returns a list of all userLikedRecipes.
      * @return LiveData<List<UserLikedRecipes>>
      */
     public LiveData<List<UserLikedRecipes>> getAllUserLikedRecipes() {
