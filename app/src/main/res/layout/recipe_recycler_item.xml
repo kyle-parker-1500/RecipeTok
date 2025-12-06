@@ -2,33 +2,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="horizontal">
 
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/outerRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/titleRecipeReyclerTextView"
-        android:text="HELLO"
-        android:layout_margin="8dp"
-        android:padding="2dp"
-        android:textSize="18sp" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/ingredientsRecipeRecyclerTextView"
-        android:text="HELLO"
-        android:layout_margin="8dp"
-        android:padding="2dp"
-        android:textSize="18sp" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/instructionsRecipeRecyclerTextView"
-        android:text="HELLO"
-        android:layout_margin="8dp"
-        android:padding="2dp"
-        android:textSize="18sp" />
+        android:layout_height="match_parent" />
 
 </LinearLayout>
