@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.project02group7.R;
@@ -20,6 +21,9 @@ public class RecipeViewHolder extends RecyclerView.ViewHolder {
     private RecipeViewHolder(@NonNull View view) {
         super(view);
         innerRecyclerViewItem = view.findViewById(R.id.innerRecyclerView);
+
+        PagerSnapHelper snapHelper = new PagerSnapHelper();
+        snapHelper.attachToRecyclerView(innerRecyclerViewItem);
     }
 
     /**
@@ -31,6 +35,7 @@ public class RecipeViewHolder extends RecyclerView.ViewHolder {
 
         final InnerRecipeAdapter adapter = new InnerRecipeAdapter(recipe);
         innerRecyclerViewItem.setAdapter(adapter);
+
     }
 
     static RecipeViewHolder create(ViewGroup parent) {

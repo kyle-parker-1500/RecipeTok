@@ -7,6 +7,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
@@ -29,12 +30,15 @@ public class HomeFragment extends Fragment {
         RecipeViewModel recipeViewModel = new ViewModelProvider(this).get(RecipeViewModel.class);
 
         // find recycler view
-        RecyclerView recyclerView = view.findViewById(R.id.parentRecyclerView);
+        RecyclerView outerRecyclerView = view.findViewById(R.id.parentRecyclerView);
         final RecipeAdapter adapter = new RecipeAdapter(new RecipeAdapter.RecipeDiff());
 
         // set adapter & layout manager
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        outerRecyclerView.setAdapter(adapter);
+        outerRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        PagerSnapHelper pagerSnapHelper = new PagerSnapHelper();
+        pagerSnapHelper.attachToRecyclerView(outerRecyclerView);
 
         // observe view model
         // replaced this -> getViewLifecycleOwner()
