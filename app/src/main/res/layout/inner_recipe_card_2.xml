@@ -24,6 +24,6 @@
         android:scrollbars="vertical"
         android:text="Instructions"
         android:textColor="@color/my_home_text_color"
-        android:textSize="24sp" />
+        android:textSize="18sp" />
 
 </LinearLayout>
