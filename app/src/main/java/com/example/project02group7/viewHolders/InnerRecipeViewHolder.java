@@ -1,5 +1,6 @@
 package com.example.project02group7.viewHolders;
 
+import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,6 +37,7 @@ public class InnerRecipeViewHolder extends RecyclerView.ViewHolder {
             // inside card 2:
             // display only instructions
             instructionsViewItem.setText(recipe.getInstructions());
+            instructionsViewItem.setMovementMethod(new ScrollingMovementMethod());
         }
     }
 
