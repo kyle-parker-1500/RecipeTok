@@ -138,13 +138,14 @@ public abstract class RecipeDatabase extends RoomDatabase {
                                 instructions = recipeJson.getString("Instructions");
 
                                 // parse & format ingredients (get rid of all brackets & quotes)
-                                ingredients = ingredients.replace("[","").replace("]","").replace("'", "");
-                                String[] tempIngredientsArray = ingredients.split(",");
+                                ingredients = ingredients.replace("[","").replace("]","");
+                                String[] tempIngredientsArray = ingredients.split("', '");
 
                                 // convert to bullet points
                                 StringBuilder sb = new StringBuilder();
                                 for (String ingredient : tempIngredientsArray) {
-                                    sb.append("• ").append(ingredient.trim()).append("\n");
+                                    String cleanIngredient = ingredient.replace("'", "");
+                                    sb.append("• ").append(cleanIngredient).append("\n");
                                 }
 
                                 // put formatted string back in ingredients
