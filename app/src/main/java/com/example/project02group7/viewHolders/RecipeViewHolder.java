@@ -22,6 +22,7 @@ public class RecipeViewHolder extends RecyclerView.ViewHolder {
         super(view);
         innerRecyclerViewItem = view.findViewById(R.id.innerRecyclerView);
 
+        // adds side scrolling animations
         PagerSnapHelper snapHelper = new PagerSnapHelper();
         snapHelper.attachToRecyclerView(innerRecyclerViewItem);
     }

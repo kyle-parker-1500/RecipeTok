@@ -37,6 +37,7 @@ public class HomeFragment extends Fragment {
         outerRecyclerView.setAdapter(adapter);
         outerRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
+        // adds vertical scrolling animations
         PagerSnapHelper pagerSnapHelper = new PagerSnapHelper();
         pagerSnapHelper.attachToRecyclerView(outerRecyclerView);
 
