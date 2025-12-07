@@ -63,12 +63,11 @@ public class HomeFragment extends Fragment {
             adapter.submitList(recipes);
         });
 
-        // get the repository
-        repository = RecipeRepository.getRepository(requireActivity().getApplication());
 
         likeButton.setOnClickListener(like -> {
-            Toast toast = Toast.makeText(requireActivity().getApplicationContext(), "Like Button Clicked!", Toast.LENGTH_SHORT);
-            toast.show();
+            // get the repository
+            repository = RecipeRepository.getRepository(requireActivity().getApplication());
+
             // get shared preferences userId
             SharedPreferences sharedPreferences = requireActivity().getApplicationContext().getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
 
@@ -87,8 +86,8 @@ public class HomeFragment extends Fragment {
             }
         });
         saveButton.setOnClickListener(save -> {
-            Toast toast = Toast.makeText(requireActivity().getApplicationContext(), "Like Button Clicked!", Toast.LENGTH_SHORT);
-            toast.show();
+            // get the repository
+            repository = RecipeRepository.getRepository(requireActivity().getApplication());
 
             // getting currently logged in userId
             SharedPreferences sharedPreferences = requireActivity().getApplicationContext().getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);

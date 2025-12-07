@@ -35,6 +35,9 @@ public interface UserSavedRecipesDAO {
     @Query("SELECT * from " + RecipeDatabase.USER_SAVED_RECIPES_TABLE + " WHERE userId == :userId")
     LiveData<List<UserSavedRecipes>> getSavedRecipesByUserId(int userId);
 
+    @Query("SELECT * from " + RecipeDatabase.USER_SAVED_RECIPES_TABLE + " WHERE recipeId == :recipeId")
+    LiveData<UserSavedRecipes> getSavedRecipeByRecipeId(int recipeId);
+
     @Query("DELETE FROM " + RecipeDatabase.USER_SAVED_RECIPES_TABLE + " WHERE userId == :userId AND recipeId == :recipeId")
     void unsave(int userId, int recipeId);
 }

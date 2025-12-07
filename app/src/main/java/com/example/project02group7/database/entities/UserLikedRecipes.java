@@ -27,7 +27,8 @@ import java.util.Objects;
         },
         indices = {
                 @Index(value = "userId"),
-                @Index(value = "recipeId")
+                @Index(value = "recipeId"),
+                @Index(value = {"userId", "recipeId"}, unique = true) // prevents duplicates from being added to table
         }
 )
 public class UserLikedRecipes {

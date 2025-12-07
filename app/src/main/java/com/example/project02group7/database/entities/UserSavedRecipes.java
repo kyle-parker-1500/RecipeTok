@@ -28,7 +28,8 @@ import java.util.Objects;
         },
         indices = {
                 @Index(value = "userId"),
-                @Index(value = "recipeId")
+                @Index(value = "recipeId"),
+                @Index(value = {"userId", "recipeId"}, unique = true)
         }
 )
 public class UserSavedRecipes {

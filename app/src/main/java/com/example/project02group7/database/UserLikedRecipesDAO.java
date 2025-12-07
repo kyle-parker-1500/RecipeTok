@@ -33,6 +33,9 @@ public interface UserLikedRecipesDAO {
     @Query("SELECT * from " + RecipeDatabase.USER_LIKED_RECIPES_TABLE + " WHERE userId == :userId")
     LiveData<List<UserLikedRecipes>> getLikedRecipesByUserId(int userId);
 
+    @Query("SELECT * from " + RecipeDatabase.USER_LIKED_RECIPES_TABLE + " WHERE id == :recipeId")
+    LiveData<UserLikedRecipes> getLikedRecipesById(int recipeId);
+
     // removes item from database if unliked
     @Query("DELETE FROM " + RecipeDatabase.USER_LIKED_RECIPES_TABLE + " WHERE userId == :userId AND recipeId == :recipeId")
     void unlike(int userId, int recipeId);

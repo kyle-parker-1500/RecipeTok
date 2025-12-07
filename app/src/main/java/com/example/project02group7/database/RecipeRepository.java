@@ -12,6 +12,7 @@ import com.example.project02group7.database.entities.UserLikedRecipes;
 import com.example.project02group7.database.entities.UserSavedRecipes;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
@@ -161,6 +162,38 @@ public class RecipeRepository {
         });
     }
 
+    /**
+     * Description: Returns a recipe of type Recipe that is at the specified recipeId
+     * @param recipeId an int
+     * @return LiveData<Recipe>
+     */
+    public LiveData<UserLikedRecipes> getLikedRecipeByRecipeId(int recipeId) {
+        return userLikedRecipesDAO.getLikedRecipesById(recipeId);
+    }
+
+    public LiveData<UserSavedRecipes> getSavedRecipeByRecipeId(int recipeId) {
+        return userSavedRecipesDAO.getSavedRecipeByRecipeId(recipeId);
+    }
+
+    /**
+     * Description: Method to check if liked recipe already exists in table.
+     * @param recipe a Recipe object
+     * @return true/false - true if duplicate found, false if not
+     */
+    public boolean checkIfDuplicateLikedRecipe(Recipe recipe) {
+        int recipeId = recipe.getId();
+        return getLikedRecipeByRecipeId(recipeId) == null;
+    }
+
+    /**
+     * Description: Method to check if liked recipe already exists in table.
+     * @param recipe a Recipe object
+     * @return true/false - true if duplicate found, false if not
+     */
+    public boolean checkIfDuplicateSavedRecipe(Recipe recipe) {
+        int recipeId = recipe.getId();
+        return getSavedRecipeByRecipeId(recipeId) == null;
+    }
     // todo: write unlike method for user & delete methods for admin
 
     /**
