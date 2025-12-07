@@ -17,16 +17,12 @@ public class InnerRecipeViewHolder extends RecyclerView.ViewHolder {
     private final TextView titleViewItem;
     private final TextView ingredientViewItem;
     private final TextView instructionsViewItem;
-    private final ImageButton likeButton;
-    private final ImageButton saveButton;
 
     private InnerRecipeViewHolder(@NonNull View recipeView) {
         super(recipeView);
         titleViewItem = recipeView.findViewById(R.id.innerRecipeTitle);
         ingredientViewItem = recipeView.findViewById(R.id.innerRecipeIngredients);
         instructionsViewItem = recipeView.findViewById(R.id.innerRecipeInstructions);
-        likeButton = recipeView.findViewById(R.id.likeButton);
-        saveButton = recipeView.findViewById(R.id.saveButton);
     }
 
     /**
