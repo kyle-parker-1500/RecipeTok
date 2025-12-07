@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -20,18 +19,19 @@
     </LinearLayout>
 
     <ImageButton
-    android:id="@+id/likeButton"
-    android:layout_width="60dp"
-    android:layout_height="60dp"
-    android:layout_gravity="center|end"
-    android:background="@drawable/like_button" />
+        android:id="@+id/likeButton"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_gravity="end|bottom"
+        android:layout_marginBottom="200dp"
+        android:background="@drawable/like_button" />
 
     <ImageButton
-    android:id="@+id/saveButton"
-    android:layout_width="50dp"
-    android:layout_height="70dp"
-    android:layout_gravity="center|end"
-    android:layout_marginTop="90dp"
-    android:layout_marginEnd="5dp"
-    android:background="@drawable/save_button" />
+        android:id="@+id/saveButton"
+        android:layout_width="50dp"
+        android:layout_height="70dp"
+        android:layout_gravity="end|bottom"
+        android:layout_marginBottom="100dp"
+        android:layout_marginEnd="5dp"
+        android:background="@drawable/save_button" />
 </FrameLayout>
