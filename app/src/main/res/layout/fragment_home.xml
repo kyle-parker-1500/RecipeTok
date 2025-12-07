@@ -1,17 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".HomeFragment">
+    android:layout_height="match_parent">
 
-    <!-- Add nested recycler view here -->
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/parentRecyclerView"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".HomeFragment">
 
-</LinearLayout>
+        <!-- Add nested recycler view here -->
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/parentRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+
+    <ImageButton
+    android:id="@+id/likeButton"
+    android:layout_width="60sp"
+    android:layout_height="60sp"
+    android:layout_gravity="center|end"
+    android:background="@drawable/like_button" />
+
+    <ImageButton
+    android:id="@+id/saveButton"
+    android:layout_width="50sp"
+    android:layout_height="70sp"
+    android:layout_gravity="center|end"
+    android:layout_marginTop="90sp"
+        android:layout_marginEnd="5sp"
+    android:background="@drawable/save_button" />
+</FrameLayout>
