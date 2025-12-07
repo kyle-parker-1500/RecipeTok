@@ -50,6 +50,7 @@
     <!-- Account Management -->
     <string name="admin_account">Admin account</string>
     <string name="cancel">Cancel</string>
-    <string name="mainactivity_createaccount">Create Account</string>
+    <string name="settings_fragment">Settings</string>
+    <string name="create_account">Create Account\n</string>/>
 
 </resources>
