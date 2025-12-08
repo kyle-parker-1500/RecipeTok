@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:padding="24dp"
+    android:background="@color/color_background_warm"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".RegisterActivity">
@@ -67,6 +68,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/admin_account"
+        android:visibility="invisible"
         app:layout_constraintTop_toBottomOf="@id/editTextConfirmPassword"
         app:layout_constraintStart_toStartOf="@id/editTextConfirmPassword"
         android:layout_marginTop="16dp" />
@@ -76,6 +78,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/create_account"
+        android:backgroundTint="@color/color_accent_teal"
+        android:textColor="@color/color_white"
         app:layout_constraintTop_toBottomOf="@id/checkBoxIsAdmin"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -88,6 +92,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/cancel"
+        android:backgroundTint="@color/color_button_dark"
+        android:textColor="@color/color_white"
         app:layout_constraintTop_toBottomOf="@id/buttonCreateAccount"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

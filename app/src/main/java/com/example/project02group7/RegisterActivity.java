@@ -69,6 +69,9 @@ public class RegisterActivity extends AppCompatActivity {
             LiveData<User> existingUser = repository.getUserByUsername(username);
             existingUser.observe(this, userInDb ->{
 
+                // Quick fix to "Username already taken" after account creation
+                existingUser.removeObservers(RegisterActivity.this);
+
                 if(userInDb != null){
                     // User with that username is already in the DB
                     Toast.makeText(this, "Username already taken", Toast.LENGTH_SHORT).show();
