@@ -3,6 +3,7 @@ package com.example.project02group7.database;
 import android.app.Application;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 
 import com.example.project02group7.MainActivity;
@@ -217,5 +218,14 @@ public class RecipeRepository {
      */
     public LiveData<List<Recipe>> getLikedRecipesForUser(int userId) {
         return recipeDAO.getLikedRecipesForUser(userId);
+    }
+
+    /**
+     * Description: Delete user liked recipe.
+     */
+    public void deleteLikedRecipe(UserLikedRecipes likedRecipe) {
+        RecipeDatabase.databaseWriteExecutor.execute(() -> {
+            userLikedRecipesDAO.delete(likedRecipe);
+        });
     }
 }
