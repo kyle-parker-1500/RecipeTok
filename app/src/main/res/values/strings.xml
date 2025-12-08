@@ -51,6 +51,13 @@
     <string name="admin_account">Admin account</string>
     <string name="cancel">Cancel</string>
     <string name="search_fragment">Search</string>
-    <string name="create_account">Create Account\n</string>/>
+    <string name="create_account">Create Account\n</string>
+
+    <!-- Recipe Page -->
+    <string name="recipe_title">Recipe Title</string>
+    <string name="recipe_ingredients">Ingredients</string>
+    <string name="recipe_instructions">Recipe Instructions</string>
+    <string name="static_label_ingredients">Ingredients</string>
+    <string name="static_label_instructions">Instructions</string>/>
 
 </resources>

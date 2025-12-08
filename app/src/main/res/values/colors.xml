@@ -8,6 +8,7 @@
 
     <!-- App Background -->
     <color name="color_background_warm">#F3DFC1</color>
+    <color name="color_card_warmish">#F6D6A4</color>
 
     <!-- Text Colors -->
     <color name="color_text_primary">#1A1A1A</color>

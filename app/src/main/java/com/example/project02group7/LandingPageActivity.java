@@ -27,7 +27,7 @@ public class LandingPageActivity extends AppCompatActivity {
     private Fragment homeFragment;
     private Fragment recipeFragment;
     private Fragment accountFragment;
-    private Fragment settingsFragment;
+    private Fragment searchFragment;
     private Fragment adminFragment;
     private Fragment userFragment;
 
@@ -61,7 +61,7 @@ public class LandingPageActivity extends AppCompatActivity {
         homeFragment = new HomeFragment();
         recipeFragment = new RecipeFragment();
         accountFragment = AccountFragment.newInstance(username, isAdmin);
-        settingsFragment = new SearchFragment();
+        searchFragment = new SearchFragment();
         adminFragment = new AdminFragment();
         userFragment = new UserFragment();
 
@@ -81,9 +81,6 @@ public class LandingPageActivity extends AppCompatActivity {
            }
            else if(id == R.id.profile){
                setCurrentFragment(accountFragment);
-           }
-           else if(id == R.id.setting){
-               setCurrentFragment(settingsFragment);
            }
            return true;
         });

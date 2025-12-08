@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/savedLinearLayout"
+    android:orientation="vertical"
+    android:padding="12dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/color_background_warm">
+
+    <!-- Title -->
+    <TextView
+        android:id="@+id/recipeSavedTitleTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/recipe_title"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <!-- Ingredients -->
+    <TextView
+        android:id="@+id/ingredientsStaticLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/static_label_ingredients"
+        android:textStyle="bold|italic"
+        android:textSize="15sp"
+        android:layout_marginTop="4dp" />
+    <TextView
+        android:id="@+id/recipeSavedIngredientsTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/recipe_ingredients"
+        android:textSize="15sp"
+        android:layout_marginTop="4dp" />
+
+    <!-- Instructions -->
+    <TextView
+        android:id="@+id/instructionsStaticLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/static_label_instructions"
+        android:textStyle="bold|italic"
+        android:textSize="15sp"
+        android:layout_marginTop="4dp" />
+    <TextView
+        android:id="@+id/recipeSavedInstructionsTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/recipe_instructions"
+        android:textSize="15sp"
+        android:layout_marginTop="4dp" />
+
+    <!-- Delete Button -->
+    <Button
+        android:id="@+id/deleteSavedRecipesButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/delete"
+        android:backgroundTint="@color/color_button_delete"
+        android:layout_marginTop="8dp" />
+</LinearLayout>
