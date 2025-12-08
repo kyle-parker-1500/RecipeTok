@@ -29,21 +29,15 @@ public class RecipeFragment extends Fragment {
         tabLayout = view.findViewById(R.id.recipesPageTabLayout);
         viewPager = view.findViewById(R.id.recipesPageViewPager);
 
-        // create adapter if it doesn't exist
-        if (adapter == null) {
-            adapter = new RecipesPagerAdapter(getChildFragmentManager(), getLifecycle());
-        }
+        viewPager.post(() -> {
+            adapter = new RecipesPagerAdapter(requireActivity());
+            viewPager.setAdapter(adapter);
 
-        viewPager.setAdapter(adapter);
-        viewPager.setSaveEnabled(false);
-
-        // connect tabs
-        new TabLayoutMediator(tabLayout, viewPager, (tab, position) -> {
-            tab.setText(position == 0 ? "Liked" : "Saved");
-        }).attach();
-
-        // wait until viewpager2 is setup
-        viewPager.post(() -> viewPager.setUserInputEnabled(true));
+            // connect tabs
+            new TabLayoutMediator(tabLayout, viewPager, (tab, position) -> {
+                tab.setText(position == 0 ? "Liked" : "Saved");
+            }).attach();
+        });
 
         return view;
     }
@@ -52,8 +46,8 @@ public class RecipeFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        if (viewPager != null) {
-            viewPager.setAdapter(null);
-        }
+        viewPager = null;
+        adapter = null;
+        tabLayout = null;
     }
 }
