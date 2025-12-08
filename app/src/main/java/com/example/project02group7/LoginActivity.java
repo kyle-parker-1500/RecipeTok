@@ -70,6 +70,7 @@ public class LoginActivity extends AppCompatActivity {
         LiveData<User> userLiveData = repository.getUserByUsername(usernameInput);
         userLiveData.observe(this, user -> {
             if(user == null){
+                //todo: make this not display when the user is found (just a couple seconds late to finding it because database isn't created)
                 toastMaker("User not found");
                 return;
             }
