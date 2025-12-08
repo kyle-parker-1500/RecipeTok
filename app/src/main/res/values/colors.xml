@@ -1,10 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
-    <color name="my_button_color">#FC0349</color>
-    <color name="grey">#2B2D30</color>
-    <color name="my_create_account_button_color">#5B5B5B</color>
-    <color name="my_home_background_color">#D4C5A5</color>
-    <color name="my_home_text_color">#3C3C3C</color>
+
+    <!-- Basic Colors -->
+    <color name="color_black">#FF000000</color>
+    <color name="color_white">#FFFFFFFF</color>
+    <color name="color_grey">#2B2D30</color>
+
+    <!-- App Background -->
+    <color name="color_background_warm">#F3DFC1</color>
+    <color name="color_card_warmish">#F6D6A4</color>
+
+    <!-- Text Colors -->
+    <color name="color_text_primary">#1A1A1A</color>
+    <color name="color_text_secondary">#6E6E6E</color>
+
+    <!-- Button Colors -->
+    <color name="color_button_main">#F2542D</color>
+    <color name="color_button_dark">#1A1A1A</color>
+    <color name="color_button_delete">#0E9594</color>
+
+    <!-- Accent Colors -->
+    <color name="color_accent_teal">#1ABC9C</color>
+    <color name="color_accent_brown">#562C2A</color>
+
 </resources>

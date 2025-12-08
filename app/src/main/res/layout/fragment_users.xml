@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:padding="16dp"
+    android:background="@color/color_background_warm"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -9,7 +10,7 @@
         android:id="@+id/usersTitleTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="All Users"
+        android:text="@string/all_users"
         android:textSize="24sp"
         android:textStyle="bold"
         android:layout_marginBottom="16dp" />
@@ -24,7 +25,7 @@
         android:id="@+id/emptyUsersTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="No users found."
+        android:text="@string/no_users_found"
         android:visibility="gone"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="12dp"

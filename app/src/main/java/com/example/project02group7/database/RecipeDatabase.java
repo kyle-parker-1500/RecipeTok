@@ -40,7 +40,7 @@ import okhttp3.Response;
         UserLikedRecipes.class,
         UserSavedRecipes.class
         },
-        version = 6, // update when db is changed
+        version = 10, // update when db is changed
         exportSchema = false)
 public abstract class RecipeDatabase extends RoomDatabase {
     public static final String USER_TABLE = "userTable";

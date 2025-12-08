@@ -5,42 +5,45 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="24dp"
+    android:background="@color/color_background_warm"
     tools:context=".AdminFragment">
 
     <TextView
         android:id="@+id/adminTitleTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Admin Panel"
+        android:text="@string/admin_panel"
         android:textSize="24sp"
         android:textStyle="bold"
+        android:textColor="@color/color_text_primary"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp" />
+
+    <Button
+        android:id="@+id/viewUsersButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/manage_users"
+        android:textColor="@color/color_white"
+        android:backgroundTint="@color/color_button_delete"
+        app:layout_constraintTop_toBottomOf="@id/adminTitleTextView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="32dp" />
 
     <Button
-        android:id="@+id/viewUsersButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Manage Users"
-        app:layout_constraintTop_toBottomOf="@id/adminTitleTextView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginTop="16dp" />
-
-    <Button
         android:id="@+id/goBackButton"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Back to Account Page"
+        android:text="@string/back_to_account_page"
+        android:textColor="@color/color_white"
+        android:backgroundTint="@color/color_button_delete"
         app:layout_constraintTop_toBottomOf="@id/viewUsersButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginStart="48dp"
-        android:layout_marginEnd="48dp"
         android:layout_marginTop="16dp" />
 
 

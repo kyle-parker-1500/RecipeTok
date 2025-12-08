@@ -1,32 +1,65 @@
 <resources>
     <string name="app_name">RecipeTok</string>
-    <string name="logged_in">LOGGED IN</string>
+
+    <!-- Login -->
     <string name="username">Username</string>
     <string name="password">Password</string>
     <string name="login_to_recipetok">Login to RecipeTok</string>
     <string name="log_in">Log in</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="login_sign_up">Login Sign Up</string>
+
+    <!-- Preferences -->
     <string name="preference_file_key">loginPreferencesFileKey</string>
     <string name="preference_userId_key">loginUserIdKey</string>
+
+    <!-- User Status -->
+    <string name="logged_in">LOGGED IN</string>
     <string name="logged_ins">Logged in</string>
-    <string name="landing_password">Password</string>
-    <string name="landing_username">Username</string>
     <string name="landing_IsAdmin">Yes</string>
     <string name="landing_admin_display">Admin:</string>
     <string name="mainactivity_recipetok">RecipeTok</string>
     <string name="mainactivity_loggedin">Not currently logged in</string>
-    <string name="mainactivity_createaccount">Create Account</string>
     <string name="log_out">Log Out</string>
     <string name="username_display">Username:</string>
     <string name="admin">Admin</string>
-    <string name="login_sign_up">Login Sign Up</string>
+    <string name="admin_no">Admin: No</string>
+
+    <!-- Navigation Tabs -->
     <string name="home">Home</string>
     <string name="recipes">Recipes</string>
-    <string name="acc">Acc</string>
-    <string name="settings">Settings</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="account">Account</string>
+    <string name="search">Search</string>
+
+    <!-- Fragments -->
     <string name="home_fragment">Home Fragment</string>
-    <string name="account_fragment">Account Fragment</string>
-    <string name="recipe_fragment">Recipe Fragment</string>
-    <string name="settings_fragment">Settings Fragment</string>
+
+    <!-- Recipe Details -->
+    <string name="ingredients">Ingredients</string>
+    <string name="title">Title</string>
+    <string name="instructions">Instructions</string>
+
+    <!-- Admin Panel -->
+    <string name="delete">Delete</string>
+    <string name="admin_panel">Admin Panel</string>
+    <string name="no_users_found">No users found.</string>
+    <string name="all_users">All Users</string>
+    <string name="manage_users">Manage Users</string>
+    <string name="back_to_account_page">Back to Account Page</string>
+
+    <!-- Account Management -->
+    <string name="admin_account">Admin account</string>
+    <string name="cancel">Cancel</string>
+    <string name="search_fragment">Search</string>
+    <string name="create_account">Create Account\n</string>
+
+    <!-- Recipe Page -->
+    <string name="recipe_title">Recipe Title</string>
+    <string name="recipe_ingredients">Ingredients</string>
+    <string name="recipe_instructions">Recipe Instructions</string>
+    <string name="static_label_ingredients">Ingredients</string>
+    <string name="static_label_instructions">Instructions</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>/>
+
 </resources>

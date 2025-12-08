@@ -4,6 +4,7 @@ import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,6 +17,7 @@ public class InnerRecipeViewHolder extends RecyclerView.ViewHolder {
     private final TextView titleViewItem;
     private final TextView ingredientViewItem;
     private final TextView instructionsViewItem;
+
     private InnerRecipeViewHolder(@NonNull View recipeView) {
         super(recipeView);
         titleViewItem = recipeView.findViewById(R.id.innerRecipeTitle);

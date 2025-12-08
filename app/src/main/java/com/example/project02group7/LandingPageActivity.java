@@ -2,11 +2,7 @@ package com.example.project02group7;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,7 +12,6 @@ import androidx.lifecycle.LiveData;
 import com.example.project02group7.database.RecipeRepository;
 import com.example.project02group7.database.entities.User;
 import com.example.project02group7.databinding.ActivityLandingPageBinding;
-import com.google.android.material.bottomnavigation.BottomNavigationItemView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class LandingPageActivity extends AppCompatActivity {
@@ -32,7 +27,7 @@ public class LandingPageActivity extends AppCompatActivity {
     private Fragment homeFragment;
     private Fragment recipeFragment;
     private Fragment accountFragment;
-    private Fragment settingsFragment;
+    private Fragment searchFragment;
     private Fragment adminFragment;
     private Fragment userFragment;
 
@@ -66,7 +61,7 @@ public class LandingPageActivity extends AppCompatActivity {
         homeFragment = new HomeFragment();
         recipeFragment = new RecipeFragment();
         accountFragment = AccountFragment.newInstance(username, isAdmin);
-        settingsFragment = new SettingsFragment();
+        searchFragment = new SearchFragment();
         adminFragment = new AdminFragment();
         userFragment = new UserFragment();
 
@@ -86,9 +81,6 @@ public class LandingPageActivity extends AppCompatActivity {
            }
            else if(id == R.id.profile){
                setCurrentFragment(accountFragment);
-           }
-           else if(id == R.id.setting){
-               setCurrentFragment(settingsFragment);
            }
            return true;
         });

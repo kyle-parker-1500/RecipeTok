@@ -36,7 +36,6 @@ public class RecipeViewHolder extends RecyclerView.ViewHolder {
 
         final InnerRecipeAdapter adapter = new InnerRecipeAdapter(recipe);
         innerRecyclerViewItem.setAdapter(adapter);
-
     }
 
     static RecipeViewHolder create(ViewGroup parent) {

@@ -7,6 +7,7 @@ import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
+import com.example.project02group7.database.entities.User;
 import com.example.project02group7.database.entities.UserLikedRecipes;
 
 import java.util.List;
@@ -30,8 +31,11 @@ public interface UserLikedRecipesDAO {
      * @param userId int
      * @return LiveData<List<UserLikedRecipes>>
      */
-    @Query("SELECT * from " + RecipeDatabase.USER_LIKED_RECIPES_TABLE + " WHERE userId == :userId")
+    @Query("SELECT * from " + RecipeDatabase.USER_LIKED_RECIPES_TABLE + " WHERE userId = :userId")
     LiveData<List<UserLikedRecipes>> getLikedRecipesByUserId(int userId);
+
+    @Query("SELECT * from " + RecipeDatabase.USER_LIKED_RECIPES_TABLE + " WHERE id == :recipeId")
+    LiveData<UserLikedRecipes> getLikedRecipesById(int recipeId);
 
     // removes item from database if unliked
     @Query("DELETE FROM " + RecipeDatabase.USER_LIKED_RECIPES_TABLE + " WHERE userId == :userId AND recipeId == :recipeId")

@@ -4,14 +4,14 @@
     android:padding="12dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#EEEEEE">
+    android:background="@color/color_background_warm">
 
     <!-- Username -->
     <TextView
         android:id="@+id/usernameRowTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="username"
+        android:text="@string/username"
         android:textSize="18sp"
         android:textStyle="bold" />
 
@@ -20,7 +20,7 @@
         android:id="@+id/isAdminRowTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Admin: No"
+        android:text="@string/admin_no"
         android:textSize="15sp"
         android:layout_marginTop="4dp" />
 
@@ -29,6 +29,7 @@
         android:id="@+id/deleteUserButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Delete"
+        android:text="@string/delete"
+        android:backgroundTint="@color/color_button_delete"
         android:layout_marginTop="8dp" />
 </LinearLayout>

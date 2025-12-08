@@ -11,10 +11,5 @@
     <item
         android:icon="@drawable/outline_account_circle_24"
         android:id="@+id/profile"
-        android:title="@string/acc" />
-    <item
-        android:icon="@drawable/outline_settings_24"
-        android:id="@+id/setting"
-        android:title="@string/settings" />
-
+        android:title="@string/account" />
 </menu>

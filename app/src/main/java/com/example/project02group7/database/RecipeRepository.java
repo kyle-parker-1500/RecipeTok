@@ -3,14 +3,17 @@ package com.example.project02group7.database;
 import android.app.Application;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 
 import com.example.project02group7.MainActivity;
 import com.example.project02group7.database.entities.Recipe;
 import com.example.project02group7.database.entities.User;
 import com.example.project02group7.database.entities.UserLikedRecipes;
+import com.example.project02group7.database.entities.UserSavedRecipes;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
@@ -149,6 +152,72 @@ public class RecipeRepository {
         });
     }
 
+    /**
+     * Description: A method that takes any number of recipes saved by a user and inserts them into the userSaved recipe
+     * table of the database.
+     * @param userSavedRecipes a Recipe
+     */
+    public void insertUserSavedRecipes(UserSavedRecipes... userSavedRecipes) {
+        RecipeDatabase.databaseWriteExecutor.execute(() -> {
+            userSavedRecipesDAO.insert(userSavedRecipes);
+        });
+    }
+
+    /**
+     * Description: Returns a recipe of type UserLikedRecipes that is at the specified recipeId
+     * @param recipeId an int
+     * @return LiveData<UserLikedRecipes>
+     */
+    public LiveData<UserLikedRecipes> getLikedRecipeByRecipeId(int recipeId) {
+        return userLikedRecipesDAO.getLikedRecipesById(recipeId);
+    }
+
+    /**
+     * Description: Gets all recipes liked by userId
+     * @param userId an Int
+     * @return LiveData<List<UserLikedRecipes>>
+     */
+    public LiveData<List<UserLikedRecipes>> getLikedRecipesByUserId(int userId) {
+        return userLikedRecipesDAO.getLikedRecipesByUserId(userId);
+    }
+
+    /**
+     * Description: Gets all recipes liked by userId
+     * @param userId an Int
+     * @return LiveData<List<UserSavedRecipes>>
+     */
+    public LiveData<List<UserSavedRecipes>> getSavedRecipesByUserId(int userId) {
+        return userSavedRecipesDAO.getSavedRecipesByUserId(userId);
+    }
+
+    /**
+     * Description: Returns a recipe of type UserSavedRecipes that is at the specified recipeId
+     * @param recipeId an int
+     * @return LiveData<UserSavedRecipes>
+     */
+    public LiveData<UserSavedRecipes> getSavedRecipeByRecipeId(int recipeId) {
+        return userSavedRecipesDAO.getSavedRecipeByRecipeId(recipeId);
+    }
+
+    /**
+     * Description: Method to check if liked recipe already exists in table.
+     * @param recipe a Recipe object
+     * @return true/false - true if duplicate found, false if not
+     */
+    public boolean checkIfDuplicateLikedRecipe(Recipe recipe) {
+        int recipeId = recipe.getId();
+        return getLikedRecipeByRecipeId(recipeId) == null;
+    }
+
+    /**
+     * Description: Method to check if liked recipe already exists in table.
+     * @param recipe a Recipe object
+     * @return true/false - true if duplicate found, false if not
+     */
+    public boolean checkIfDuplicateSavedRecipe(Recipe recipe) {
+        int recipeId = recipe.getId();
+        return getSavedRecipeByRecipeId(recipeId) == null;
+    }
     // todo: write unlike method for user & delete methods for admin
 
     /**
@@ -159,6 +228,13 @@ public class RecipeRepository {
         return userLikedRecipesDAO.getAllUserLikedRecipes();
     }
 
+    /**
+     * Description: A method that returns a list of type LiveData that returns a list of all userSavedRecipes.
+     * @return LiveData<List<UserSavedRecipes>>
+     */
+    public LiveData<List<UserSavedRecipes>> getAllUserSavedRecipes() {
+        return userSavedRecipesDAO.getAllUserSavedRecipes();
+    }
     // gets recipe data by user id
     /**
      * Description: Returns a recipe of type Recipe that is at the specified userId
@@ -167,5 +243,23 @@ public class RecipeRepository {
      */
     public LiveData<List<Recipe>> getLikedRecipesForUser(int userId) {
         return recipeDAO.getLikedRecipesForUser(userId);
+    }
+
+    /**
+     * Description: Delete user liked recipe.
+     */
+    public void deleteLikedRecipe(UserLikedRecipes likedRecipe) {
+        RecipeDatabase.databaseWriteExecutor.execute(() -> {
+            userLikedRecipesDAO.delete(likedRecipe);
+        });
+    }
+
+    /**
+     * Description: Delete user saved recipe.
+     */
+    public void deleteSavedRecipe(UserSavedRecipes savedRecipe) {
+        RecipeDatabase.databaseWriteExecutor.execute(() -> {
+            userSavedRecipesDAO.delete(savedRecipe);
+        });
     }
 }
